@@ -10,11 +10,11 @@ def main():
 
     try:
         channel = connection.channel()
-        # queue_declear --> create a new queue only
-        # channel.queue_declare(queue=p_queue)
+        # queue_declare --> create a new queue only
+        channel.queue_declare(queue=p_queue)
 
 
-        for i in range(0, 100000):
+        for i in range(0, 1000):
             msg = 'order: ' + str(i)
             logging.info('msg [{0}]'.format(msg))
             channel.basic_publish(exchange='', properties=pika.BasicProperties(delivery_mode = 2), routing_key=p_queue, body=msg)
